@@ -8,6 +8,15 @@ export const Theme = styled.div`
 `
 
 export const Text = styled.p`
-    font-size: ${ ({ size }: { size?: number, letterS?: number }) => size ? `${size}px` : "16px" };
-    letter-spacing: ${ ({ letterS }) => letterS ? letterS : 0 };
+    font-size: ${ ({ size }: { bold?: boolean, size?: number, letterS?: number, width?: number, color?: string }) => size ? `${size}px` : "16px" };
+    letter-spacing: ${ ({ letterS }) => letterS ? `${letterS}px` : 0 };
+    color: ${ ({ color }) => color ? color : "#fff" };
+    width: ${ ({ width }) => width ? `${ width }px` : "fit-content" };
+    font-weight: ${ ({ bold }) => bold ? 700 : 600 };
+    line-height: 0.8;
+`
+
+export const Container = styled.div`
+    width: ${ ({ minWidth } : { minWidth?: number }) => minWidth ? `min( ${ minWidth }px, 95%)` : "min( 1360px, 95% )" }; 
+    margin: 0 auto;
 `
