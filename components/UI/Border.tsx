@@ -7,6 +7,7 @@ interface Props {
     pointer?: boolean;
     width?: string;
     margin?: string;
+    event?: () => void;
 }
 
 const BorderStyle = styled.div`
@@ -19,13 +20,14 @@ const BorderStyle = styled.div`
     cursor: ${ ({ pointer }) => pointer ? "pointer" : "auto" };
 `
 
-export const Border: FC<Props> = ({ width, children, padding, pointer = false, margin }) => {
+export const Border: FC<Props> = ({ event, width, children, padding, pointer = false, margin }) => {
     return (
         <BorderStyle 
             padding={ padding } 
             pointer={ pointer } 
             width={ width }
-            margin={ margin }    
+            margin={ margin }   
+            onClick={ event } 
         >
             { children }
         </BorderStyle>
