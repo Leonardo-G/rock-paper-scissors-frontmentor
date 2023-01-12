@@ -1,0 +1,1 @@
+export type IHand = "rock" | "scissors" | "paper";

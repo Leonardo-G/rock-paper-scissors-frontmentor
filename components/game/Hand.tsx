@@ -1,9 +1,12 @@
-import React, { FC } from 'react'
+import React, { FC, useContext } from 'react'
 
 import styled from 'styled-components'
 
 import { ImageContainer } from '../image/ImageContainer'
 import { Position } from '../position/Position'
+
+import { GameContext } from '../../context/GameContext'
+import { IHand } from '../../interface/game'
 
 const Border = styled.div`
     position: relative;
@@ -26,17 +29,26 @@ const Box = styled.div`
     height: 225px;
     width: 225px;
     box-shadow: inset 0px 9px 5px 0px #a0a0a0a3;
+    cursor: pointer;
 `
 
 interface Props {
     gradientBorder: string;
     shadow: string;
     src: string;
+    value: IHand;
 }
 
-export const Hand:FC<Props> = ({ gradientBorder, shadow, src }) => {
+export const Hand:FC<Props> = ({ gradientBorder, shadow, src, value }) => {
+
+    const { changeInGame } = useContext( GameContext );
+
     return (
-        <Border gradientBorder={ gradientBorder } shadow={ shadow }>
+        <Border 
+            gradientBorder={ gradientBorder } 
+            shadow={ shadow }
+            onClick={ () => changeInGame( value, src ) }
+        >
             <Box>
                 <Position width='100%' top='50%' left='50%' translateBox='-50% -50%'>
                     <ImageContainer 

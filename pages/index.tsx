@@ -1,16 +1,19 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { ContainerGame } from "../components/game/ContainerGame";
+import { InGame } from "../components/game/InGame";
 import { HeaderContainer } from "../components/header/HeaderContainer";
 import { LayoutPage } from "../components/layout/LayoutPage";
 import { Position } from "../components/position/Position";
 import { Rules } from "../components/rules/Rules";
 import { Border } from "../components/UI/Border";
+import { GameContext } from "../context/GameContext";
 
 import { Container, Text } from "../styled/globals";
 
 export default function Home() {
 
   const [rulesActivated, setRulesActivated] = useState(false);
+  const { inGame } = useContext( GameContext );
 
   const handleChangeRules = () => {
     setRulesActivated( true );
@@ -21,7 +24,14 @@ export default function Home() {
       <Container>
         <Container minWidth={ 800 }>
           <HeaderContainer />
-          <ContainerGame />
+          {
+            !inGame ?
+                <ContainerGame />
+            : 
+              <>
+                <InGame />
+              </>
+          }
         </Container>
       </Container>
       <Position bottom="25px" rigth="25px">

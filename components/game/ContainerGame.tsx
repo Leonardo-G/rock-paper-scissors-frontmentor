@@ -41,6 +41,7 @@ export const ContainerGame = () => {
                         gradientBorder='hsl(230, 89%, 62%), hsl(230, 89%, 65%)'
                         shadow='#4865f4a0'   
                         src='/icon-paper.svg' 
+                        value="paper"
                     />
                     <Position top='50%' rigth='-50%'>
                         <Line></Line>
@@ -50,7 +51,8 @@ export const ContainerGame = () => {
                     <Hand 
                         gradientBorder='hsl(39, 89%, 49%), hsl(40, 84%, 53%)'
                         shadow='#eca922a0'
-                        src='/icon-scissors.svg' 
+                        src='/icon-scissors.svg'
+                        value="scissors" 
                     />
                     <Position bottom='0%' rigth='30%'>
                         <Line rotate={ 125 }></Line>
@@ -62,6 +64,7 @@ export const ContainerGame = () => {
                     gradientBorder='hsl(349, 71%, 52%), hsl(349, 70%, 56%)'
                     shadow='#dd405da0'
                     src='/icon-rock.svg'
+                    value="rock" 
                 />
                 <Position top='0%' rigth='50%'>
                     <Line rotate={ 55 }></Line>
