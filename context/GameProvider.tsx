@@ -1,5 +1,5 @@
 import React, { FC, ReactNode, useReducer } from 'react'
-import { IHand } from '../interface/game';
+import { IHand, IHandInfo } from '../interface/game';
 import { GameContext } from './GameContext';
 import gameReducer from './gameReducer';
 
@@ -7,7 +7,7 @@ export interface IGameContext {
     inGame: boolean;
     hand: "paper" | "rock" | "scissors" | null;
     handComputer: "paper" | "rock" | "scissors" | null;
-    result: "loss" | "win" | "draw" | null;
+    result: "lose" | "win" | "draw" | null;
     urlHand: string | null;
 }
 
@@ -39,12 +39,29 @@ export const GameProvider: FC<Props> = ({ children }) => {
         })
     }
 
+    const gameEnd = ( handComputer: IHand ) => {
+        dispatch({
+            type: "GAME_END",
+            payload: {
+                handComputer
+            }
+        })
+    }   
+
+    const resetGame = () => {
+        dispatch({
+            type: "RESET GAME"
+        })
+    }
+
     return (
         <GameContext.Provider value={{
             ...state,
 
             //methods
-            changeInGame
+            changeInGame,
+            gameEnd,
+            resetGame
         }}>
             { children }
         </GameContext.Provider>

@@ -17,6 +17,6 @@ export const Text = styled.p`
 `
 
 export const Container = styled.div`
-    width: ${ ({ minWidth } : { minWidth?: number }) => minWidth ? `min( ${ minWidth }px, 95%)` : "min( 1360px, 95% )" }; 
+    width: ${ ({ minWidth } : { minWidth?: number }) => minWidth ? `min( ${ minWidth }px, 95%)` : "min( 1160px, 95% )" }; 
     margin: 0 auto;
 `

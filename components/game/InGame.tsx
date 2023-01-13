@@ -4,11 +4,14 @@ import { GameContext } from '../../context/GameContext'
 import { Text } from '../../styled/globals'
 import { Hand } from './Hand'
 import { handDatabase } from '../../database/hand';
+import { IHand } from '../../interface/game';
 
 const Box = styled.div`
     margin-top: 90px;
     display: flex;
-    justify-content: space-between; 
+    justify-content: space-around; 
+    align-items: center;
+    column-gap: 50px;
 `
 
 const BoxHand = styled.div`
@@ -18,10 +21,28 @@ const BoxHand = styled.div`
     row-gap: 70px;
 `
 
+const Results = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 20px;
+`
+
+const Button = styled.div`
+    background: #fff;
+    padding: 15px 60px;
+    border-radius: 6px;
+    cursor: pointer;
+    p{
+        color: hsl(349, 71%, 52%);
+    }
+`
+
 export const InGame = () => {
 
-    const { urlHand, hand } = useContext( GameContext );
+    const { urlHand, hand, gameEnd, result, resetGame } = useContext( GameContext );
     const [houseHand, setHouseHand] = useState("paper");
+    const [isEndGame, setIsEndGame] = useState(false);
 
     const housePicked = () => {
         let counter = 1;
@@ -38,12 +59,21 @@ export const InGame = () => {
 
         setTimeout(() => {
             clearInterval(id);
+            setIsEndGame( true );
         }, 2000);
     }
 
     useEffect(() => {
         housePicked()
     }, [])
+
+    useEffect(() => {
+
+        if ( hand && isEndGame ) {
+            gameEnd( houseHand as IHand );
+        }
+
+    }, [ isEndGame ])
 
     return (
         <Box>
@@ -59,6 +89,15 @@ export const InGame = () => {
                     shadow={ handDatabase.filter( c => c.value === hand )[0].shadow } 
                 />
            </BoxHand>
+           { 
+                result &&   
+                <Results>
+                    <Text size={ 48 }>YOU { result.toLocaleUpperCase() }</Text>
+                    <Button onClick={ resetGame }>
+                        <Text letterS={ 1.6 }>PLAY AGAIN</Text>
+                    </Button>
+                </Results>
+           }
            <BoxHand>
                 <Text 
                     size={ 26 }

@@ -13,7 +13,7 @@ import { Container, Text } from "../styled/globals";
 export default function Home() {
 
   const [rulesActivated, setRulesActivated] = useState(false);
-  const { inGame } = useContext( GameContext );
+  const { inGame, result } = useContext( GameContext );
 
   const handleChangeRules = () => {
     setRulesActivated( true );
@@ -24,15 +24,15 @@ export default function Home() {
       <Container>
         <Container minWidth={ 800 }>
           <HeaderContainer />
-          {
-            !inGame ?
-                <ContainerGame />
-            : 
-              <>
-                <InGame />
-              </>
-          }
         </Container>
+        {
+          !inGame && !result ?
+              <ContainerGame />
+          : 
+            <>
+              <InGame />
+            </>
+        }
       </Container>
       <Position bottom="25px" rigth="25px">
         <Border 

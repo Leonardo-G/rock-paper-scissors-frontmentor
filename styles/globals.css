@@ -7,7 +7,7 @@ html{
     box-sizing: border-box;
 }
 
-p, h1, h2, span{
+p, h1, h2, span, button{
     color: #fff;
     font-size: 16px;
     font-family: 'Barlow Semi Condensed', sans-serif;
