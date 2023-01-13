@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { Position } from '../position/Position'
 import { Hand } from './Hand'
+import { handDatabase } from '../../database/hand';
 
 const Game = styled.div`
     margin-top: 75px;
@@ -38,10 +39,10 @@ export const ContainerGame = () => {
             <Box>
                 <BoxHand>
                     <Hand 
-                        gradientBorder='hsl(230, 89%, 62%), hsl(230, 89%, 65%)'
-                        shadow='#4865f4a0'   
-                        src='/icon-paper.svg' 
-                        value="paper"
+                        gradientBorder={ handDatabase[0].gradientBorder }
+                        shadow={ handDatabase[0].shadow }
+                        src={ handDatabase[0].src }
+                        value={ handDatabase[0].value }
                     />
                     <Position top='50%' rigth='-50%'>
                         <Line></Line>
@@ -49,10 +50,10 @@ export const ContainerGame = () => {
                 </BoxHand>
                 <BoxHand>
                     <Hand 
-                        gradientBorder='hsl(39, 89%, 49%), hsl(40, 84%, 53%)'
-                        shadow='#eca922a0'
-                        src='/icon-scissors.svg'
-                        value="scissors" 
+                        gradientBorder={ handDatabase[1].gradientBorder }
+                        shadow={ handDatabase[1].shadow }
+                        src={ handDatabase[1].src }
+                        value={ handDatabase[1].value }
                     />
                     <Position bottom='0%' rigth='30%'>
                         <Line rotate={ 125 }></Line>
@@ -61,10 +62,10 @@ export const ContainerGame = () => {
             </Box>
             <SecondBox>
                 <Hand 
-                    gradientBorder='hsl(349, 71%, 52%), hsl(349, 70%, 56%)'
-                    shadow='#dd405da0'
-                    src='/icon-rock.svg'
-                    value="rock" 
+                    gradientBorder={ handDatabase[2].gradientBorder }
+                    shadow={ handDatabase[2].shadow }
+                    src={ handDatabase[2].src }
+                    value={ handDatabase[2].value }
                 />
                 <Position top='0%' rigth='50%'>
                     <Line rotate={ 55 }></Line>
