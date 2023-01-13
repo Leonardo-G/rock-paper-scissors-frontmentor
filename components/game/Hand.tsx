@@ -37,9 +37,10 @@ interface Props {
     shadow: string;
     src: string;
     value: IHand;
+    noEvent?: boolean;
 }
 
-export const Hand:FC<Props> = ({ gradientBorder, shadow, src, value }) => {
+export const Hand:FC<Props> = ({ gradientBorder, shadow, src, value, noEvent = true }) => {
 
     const { changeInGame } = useContext( GameContext );
 
@@ -47,7 +48,7 @@ export const Hand:FC<Props> = ({ gradientBorder, shadow, src, value }) => {
         <Border 
             gradientBorder={ gradientBorder } 
             shadow={ shadow }
-            onClick={ () => changeInGame( value, src ) }
+            onClick={ () => !noEvent ? "" : changeInGame( value, src ) }
         >
             <Box>
                 <Position width='100%' top='50%' left='50%' translateBox='-50% -50%'>

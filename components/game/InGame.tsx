@@ -108,6 +108,7 @@ export const InGame = () => {
                     value={ handDatabase.filter( c => c.value === houseHand )[0].value }
                     gradientBorder={ handDatabase.filter( c => c.value === houseHand )[0].gradientBorder }
                     shadow={ handDatabase.filter( c => c.value === houseHand )[0].shadow } 
+                    noEvent={ false }
                 />
            </BoxHand>
         </Box>
