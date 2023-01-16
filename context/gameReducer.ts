@@ -3,6 +3,7 @@ import { resultGame } from "../utils/game";
 import { IGameContext } from "./GameProvider";
 
 type ActionTypes = 
+    | { type: "CHANGE SCORE", payload: number }
     | { type: "IN_GAME", payload: { hand: IHand, urlHand: string } }
     | { type: "GAME_END", payload: { handComputer: IHand } }
     | { type: "RESET GAME" }
@@ -12,6 +13,13 @@ type ActionTypes =
 const gameReducer = ( state: IGameContext, action: ActionTypes ): IGameContext => {
     
     switch (action.type) {
+
+        case "CHANGE SCORE":
+            return {
+                ...state,
+                score: action.payload
+            }
+
         case "IN_GAME":
             
             return {
@@ -26,7 +34,8 @@ const gameReducer = ( state: IGameContext, action: ActionTypes ): IGameContext =
                 ...state,
                 inGame: false,
                 result: resultGame( state.hand!, action.payload.handComputer ) as "lose" | "win" | "draw",
-                handComputer: action.payload.handComputer
+                handComputer: action.payload.handComputer,
+                gameFinish: true
             }
 
         case "RESET GAME":
@@ -36,13 +45,20 @@ const gameReducer = ( state: IGameContext, action: ActionTypes ): IGameContext =
                 hand: null,
                 handComputer: null,
                 result: null,
-                urlHand: null
+                urlHand: null,
+                gameFinish: false
             }
 
         case "WIN GAME":
             return {
                 ...state,
-                score: state.score++
+                score: state.score + 1
+            }
+
+        case "LOSE GAME":
+            return {
+                ...state,
+                score: state.score - 1
             }
 
         default:

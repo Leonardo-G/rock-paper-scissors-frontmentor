@@ -100,7 +100,6 @@ export const InGame = () => {
 
         setTimeout(() => {
 
-            gamePoint( resultGame( hand!, houseHand ) )
             setIsEndGame( true );
         }, 2400);
     }
@@ -113,6 +112,8 @@ export const InGame = () => {
 
         if ( hand && isEndGame ) {
             gameEnd( houseHand as IHand );
+            console.log(resultGame( hand!, houseHand ))
+            gamePoint( resultGame( hand!, houseHand ) )
         }
 
     }, [ isEndGame ])
