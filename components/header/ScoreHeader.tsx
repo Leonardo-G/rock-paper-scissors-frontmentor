@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import styled from 'styled-components'
+import { GameContext } from '../../context/GameContext'
 import { Text } from '../../styled/globals'
 
 const Box = styled.div`
@@ -13,6 +14,9 @@ const Box = styled.div`
 `
 
 export const ScoreHeader = () => {
+
+    const { score } = useContext( GameContext );
+
     return (
         <Box>
             <Text 
@@ -24,7 +28,7 @@ export const ScoreHeader = () => {
                 color='hsl(229, 25%, 31%)'
                 size={ 46 }
                 bold
-            >13</Text>
+            >{ score }</Text>
         </Box>
     )
 }

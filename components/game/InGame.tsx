@@ -5,6 +5,7 @@ import { Text } from '../../styled/globals'
 import { Hand } from './Hand'
 import { handDatabase } from '../../database/hand';
 import { IHand } from '../../interface/game';
+import { resultGame } from '../../utils/game';
 
 const Box = styled.div`
     margin-top: 90px;
@@ -68,8 +69,8 @@ const ShadowWinner = styled.div`
 
 export const InGame = () => {
 
-    const { urlHand, hand, gameEnd, result, resetGame } = useContext( GameContext );
-    const [houseHand, setHouseHand] = useState("paper");
+    const { urlHand, hand, gameEnd, result, resetGame, gamePoint } = useContext( GameContext );
+    const [houseHand, setHouseHand] = useState<IHand>("paper");
     const [isEndGame, setIsEndGame] = useState(false);
 
     const housePicked = () => {
@@ -98,7 +99,8 @@ export const InGame = () => {
         }, 2100);
 
         setTimeout(() => {
-            
+
+            gamePoint( resultGame( hand!, houseHand ) )
             setIsEndGame( true );
         }, 2400);
     }
@@ -161,6 +163,10 @@ export const InGame = () => {
                 {
                     result === "lose" &&
                     <ShadowWinner></ShadowWinner>
+                }
+                {
+                    result === "lose" &&
+                    <audio src='/audio/audio-lose.mp3' autoPlay/>
                 }
            </BoxHand>
         </Box>

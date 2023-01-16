@@ -6,6 +6,8 @@ type ActionTypes =
     | { type: "IN_GAME", payload: { hand: IHand, urlHand: string } }
     | { type: "GAME_END", payload: { handComputer: IHand } }
     | { type: "RESET GAME" }
+    | { type: "WIN GAME" }
+    | { type: "LOSE GAME" }
 
 const gameReducer = ( state: IGameContext, action: ActionTypes ): IGameContext => {
     
@@ -29,11 +31,18 @@ const gameReducer = ( state: IGameContext, action: ActionTypes ): IGameContext =
 
         case "RESET GAME":
             return {
+                ...state,
                 inGame: false,
                 hand: null,
                 handComputer: null,
                 result: null,
                 urlHand: null
+            }
+
+        case "WIN GAME":
+            return {
+                ...state,
+                score: state.score++
             }
 
         default:

@@ -1,8 +1,8 @@
 import { IHand } from '../interface/game';
 
-export const resultGame = ( hand: IHand, handComputer: IHand ) => {
+export const resultGame = ( hand: IHand, handComputer: IHand ): "win" | "lose" | "draw" => {
     
-    let result = "draw"; 
+    let result: "draw" | "win" | "lose" = "draw"; 
 
     if ( hand === handComputer ) return result;
     

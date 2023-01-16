@@ -9,6 +9,7 @@ export interface IGameContext {
     handComputer: "paper" | "rock" | "scissors" | null;
     result: "lose" | "win" | "draw" | null;
     urlHand: string | null;
+    score: number;
 }
 
 const INITIA_STATE: IGameContext = {
@@ -16,7 +17,8 @@ const INITIA_STATE: IGameContext = {
     hand: null,
     handComputer: null,
     result: null,
-    urlHand: null
+    urlHand: null,
+    score: 0
 }
 
 interface Props{
@@ -54,6 +56,20 @@ export const GameProvider: FC<Props> = ({ children }) => {
         })
     }
 
+    const gamePoint = (result: "win" | "lose" | "draw") => {
+        if ( result === "draw" ) return;
+        
+        if ( result === "win" ) {
+            dispatch({ type: "WIN GAME" });
+            return;
+        }
+
+        if ( result === "lose" ){
+            dispatch({ type: "LOSE GAME" });
+            return;
+        }
+    }
+
     return (
         <GameContext.Provider value={{
             ...state,
@@ -61,7 +77,8 @@ export const GameProvider: FC<Props> = ({ children }) => {
             //methods
             changeInGame,
             gameEnd,
-            resetGame
+            resetGame,
+            gamePoint
         }}>
             { children }
         </GameContext.Provider>
