@@ -69,7 +69,7 @@ const ShadowWinner = styled.div`
 
 export const InGame = () => {
 
-    const { urlHand, hand, gameEnd, result, resetGame, gamePoint } = useContext( GameContext );
+    const { urlHand, hand, gameEnd, result, resetGame, gamePoint, inGame } = useContext( GameContext );
     const [houseHand, setHouseHand] = useState<IHand>("paper");
     const [isEndGame, setIsEndGame] = useState(false);
 
@@ -93,7 +93,7 @@ export const InGame = () => {
 
         setTimeout(() => {
             clearInterval(id);
-            console.log(Math.floor(Math.random() * 2))
+            
             const number = Math.floor(Math.random() * handDatabase.length )
             setHouseHand( handDatabase[ number ].value )
         }, 2100);
@@ -112,7 +112,7 @@ export const InGame = () => {
 
         if ( hand && isEndGame ) {
             gameEnd( houseHand as IHand );
-            console.log(resultGame( hand!, houseHand ))
+            
             gamePoint( resultGame( hand!, houseHand ) )
         }
 
@@ -120,6 +120,10 @@ export const InGame = () => {
 
     return (
         <Box>
+            {
+                inGame &&
+                <audio src='/audio/change-hand.mp3' autoPlay/>
+            }
            <BoxHand>
                 <Text 
                     size={ 26 }
@@ -149,6 +153,10 @@ export const InGame = () => {
                     </Button>
                 </Results>
            }
+           {
+                result === "draw" &&
+                <audio src='/audio/audio-draw.mp3' autoPlay/>    
+            }
            <BoxHand>
                 <Text 
                     size={ 26 }
