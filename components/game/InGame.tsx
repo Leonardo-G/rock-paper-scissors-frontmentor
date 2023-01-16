@@ -15,6 +15,7 @@ const Box = styled.div`
 `
 
 const BoxHand = styled.div`
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -38,6 +39,33 @@ const Button = styled.div`
     }
 `
 
+const ShadowWinner = styled.div`
+    position: absolute;
+    top: 63%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation-name: shadow;
+    animation-duration: 1s;
+    animation-delay: 0s;
+    animation-fill-mode: forwards;
+    width: 0px;
+    height: 0px;
+    border-radius: 50%;
+    background: radial-gradient(#ffffff4c, #082d5e28 );
+
+    @keyframes shadow {
+        0% { 
+            width: 0px;
+            height: 0px; 
+        }
+        100% {
+            width: 600px;
+            height: 600px; 
+        }
+
+    }
+`
+
 export const InGame = () => {
 
     const { urlHand, hand, gameEnd, result, resetGame } = useContext( GameContext );
@@ -55,12 +83,24 @@ export const InGame = () => {
     
             setHouseHand( handDatabase[ counter ].value )
             counter++;
-        }, 250)
+        }, 200)
 
         setTimeout(() => {
             clearInterval(id);
-            setIsEndGame( true );
+        
         }, 2000);
+
+        setTimeout(() => {
+            clearInterval(id);
+            console.log(Math.floor(Math.random() * 2))
+            const number = Math.floor(Math.random() * handDatabase.length )
+            setHouseHand( handDatabase[ number ].value )
+        }, 2100);
+
+        setTimeout(() => {
+            
+            setIsEndGame( true );
+        }, 2400);
     }
 
     useEffect(() => {
@@ -88,6 +128,14 @@ export const InGame = () => {
                     gradientBorder={ handDatabase.filter( c => c.value === hand )[0].gradientBorder }
                     shadow={ handDatabase.filter( c => c.value === hand )[0].shadow } 
                 />
+                {
+                    result === "win" &&
+                    <ShadowWinner></ShadowWinner>
+                }
+                {
+                    result === "win" &&
+                    <audio src='/audio/audio-win.mp3' autoPlay/>
+                }
            </BoxHand>
            { 
                 result &&   
@@ -110,6 +158,10 @@ export const InGame = () => {
                     shadow={ handDatabase.filter( c => c.value === houseHand )[0].shadow } 
                     noEvent={ false }
                 />
+                {
+                    result === "lose" &&
+                    <ShadowWinner></ShadowWinner>
+                }
            </BoxHand>
         </Box>
     )

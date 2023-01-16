@@ -5,6 +5,7 @@ export const Theme = styled.div`
     min-height: 100vh;
     width: 100%;
     background: linear-gradient(hsl(214, 47%, 23%), hsl(237, 49%, 15%));
+    overflow-x: hidden;
 `
 
 export const Text = styled.p`
