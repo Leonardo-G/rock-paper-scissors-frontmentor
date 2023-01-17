@@ -14,6 +14,10 @@ const Box = styled.div`
     justify-content: center;
     row-gap: 50px;
     column-gap: 100px;
+
+    @media (max-width: 620px){
+        column-gap: 50px;
+    }
 `
 
 const BoxHand = styled.div`

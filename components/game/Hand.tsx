@@ -16,6 +16,11 @@ const Border = styled.div`
     z-index: 19;
     border-radius: 50%;
     box-shadow: 0px 10px 0px 0px ${ ({ shadow }) => shadow };
+
+    @media (max-width: 720px){
+        width: 150px;
+        height: 150px;
+    }
 `
 
 const Box = styled.div`
@@ -30,6 +35,16 @@ const Box = styled.div`
     width: 225px;
     box-shadow: inset 0px 9px 5px 0px #a0a0a0a3;
     cursor: pointer;
+    
+    @media (max-width: 720px){
+        width: 120px;
+        height: 120px;
+
+        img {
+            width: 80px;
+            height: 80px;
+        }
+    }
 `
 
 interface Props {

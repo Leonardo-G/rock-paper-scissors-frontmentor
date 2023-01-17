@@ -13,6 +13,12 @@ const Box = styled.div`
     width: ${ ({ width } : { width?: string, height?: string }) => width ? width : "100%" };
     height: ${ ({ height }) => height ? height : "200px" };
     overflow: hidden;
+
+    @media (max-width: 720px){
+        height: ${ ({ height }) => height ? `${( Number( height.split("px")[0] ) * 0.5)}px` : "100px" };;
+    }
+
+
 `
 
 export const ImageContainer: FC<Props> = ({ width, heigth, src }) => {

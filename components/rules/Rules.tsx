@@ -53,6 +53,7 @@ export const Rules: FC<Props> = ({ setRulesActivated }) => {
                     width='450px'
                     height='500px'
                     radius='20px'
+                    responsive
                 >
                     <Flex>
                         <Text color='hsl(229, 25%, 31%)' size={ 28 }>RULES</Text>

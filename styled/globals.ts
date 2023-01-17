@@ -17,7 +17,11 @@ export const Text = styled.p`
     line-height: 0.8;
 
     @media (max-width: 920px){
-        font-size: ${ ({ size } ) => size ? `${size * 0.8}px` : "14px"
+        font-size: ${ ({ size } ) => size ? `${size * 0.8}px` : "14px"};
+    }
+
+    @media (max-width: 520px) {
+        font-size: ${ ({ size } ) => size && size * 0.5 > 12 ? `${size * 0.5}px` : "12px"};
     }
 `
 

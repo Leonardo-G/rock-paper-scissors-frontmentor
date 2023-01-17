@@ -15,6 +15,7 @@ const PositionAbs = styled.div`
         zIndex?: number;
         backColor?: string;
         radius?: string;
+        responsive?: boolean;
     }) => top ? top : "auto" };
     border-radius: ${ ({ radius }) => radius ? radius : "0px" };
     background: ${ ({ backColor }) => backColor ? backColor : "transparent" };
@@ -25,6 +26,11 @@ const PositionAbs = styled.div`
     bottom: ${ ({ bottom }) => bottom ? bottom : "auto" };
     translate: ${ ({ translateBox }) => translateBox ? translateBox : "none" };
     z-index: ${ ({ zIndex }) => zIndex ? zIndex : 0 };
+
+    @media ( max-width: 720px ){
+        width: ${ ({ responsive, width }) => responsive ? "100%" : width ? width : "fit-content" };
+        height: ${ ({ responsive, height }) => responsive ? "100%" : height ? height : "fit-content" };
+    }
 `
 
 interface Props {
@@ -39,10 +45,11 @@ interface Props {
     zIndex?: number;
     backColor?: string;
     radius?: string;
+    responsive?: boolean;
     event?: () => void;
 }
 
-export const Position: FC<Props> = ({ event, children, width, top, left, rigth, bottom, translateBox, height, zIndex, radius, backColor }) => {
+export const Position: FC<Props> = ({ responsive, event, children, width, top, left, rigth, bottom, translateBox, height, zIndex, radius, backColor }) => {
     
     return (
         <PositionAbs 
@@ -57,6 +64,7 @@ export const Position: FC<Props> = ({ event, children, width, top, left, rigth, 
             radius={ radius }
             backColor={ backColor }
             onClick={ event }
+            responsive={ responsive }
         >
             { children }
         </PositionAbs>

@@ -13,6 +13,10 @@ const Box = styled.div`
     justify-content: space-around; 
     align-items: center;
     column-gap: 50px;
+
+    @media (max-width: 920px){
+        column-gap: 20px;
+    }
 `
 
 const BoxHand = styled.div`
@@ -21,6 +25,10 @@ const BoxHand = styled.div`
     flex-direction: column;
     align-items: center;
     row-gap: 70px;
+
+    @media (max-width: 520px) {
+        row-gap: 20px;
+    }
 `
 
 const Results = styled.div`
@@ -32,6 +40,7 @@ const Results = styled.div`
     @media (max-width: 920px){
         display: none;
     }
+    
 `
 
 const Button = styled.div`
@@ -39,9 +48,11 @@ const Button = styled.div`
     padding: 15px 60px;
     border-radius: 6px;
     cursor: pointer;
+    z-index: 99;
     p{
         color: hsl(349, 71%, 52%);
     }
+
 `
 
 const ShadowWinner = styled.div`
@@ -57,6 +68,7 @@ const ShadowWinner = styled.div`
     height: 0px;
     border-radius: 50%;
     background: radial-gradient(#ffffff4c, #082d5e28 );
+    z-index: 1;
 
     @keyframes shadow {
         0% { 
@@ -67,7 +79,21 @@ const ShadowWinner = styled.div`
             width: 600px;
             height: 600px; 
         }
+    }
 
+    @media (max-width: 520px) {
+        top: 69%;
+
+        @keyframes shadow {
+            0% { 
+                width: 0px;
+                height: 0px; 
+            }
+            100% {
+                width: 300px;
+                height: 300px; 
+            }
+        }
     }
 `
 
@@ -79,6 +105,7 @@ const ResultsResponsive = styled.div`
         flex-direction: column;
         align-items: center;
         row-gap: 20px;
+        margin-top: 50px;
     }
 `
 
@@ -128,7 +155,7 @@ export const InGame = () => {
         if ( hand && isEndGame ) {
             gameEnd( houseHand as IHand );
             
-            gamePoint( resultGame( hand!, houseHand ) )
+            gamePoint( resultGame( hand!, houseHand ) );
         }
 
     }, [ isEndGame ])
