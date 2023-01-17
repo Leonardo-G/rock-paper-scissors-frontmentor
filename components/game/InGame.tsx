@@ -82,7 +82,7 @@ const ShadowWinner = styled.div`
     }
 
     @media (max-width: 520px) {
-        top: 69%;
+        top: 59%;
 
         @keyframes shadow {
             0% { 
