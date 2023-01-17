@@ -15,6 +15,10 @@ export const Text = styled.p`
     width: ${ ({ width }) => width ? `${ width }px` : "fit-content" };
     font-weight: ${ ({ bold }) => bold ? 700 : 600 };
     line-height: 0.8;
+
+    @media (max-width: 920px){
+        font-size: ${ ({ size } ) => size ? `${size * 0.8}px` : "14px"
+    }
 `
 
 export const Container = styled.div`

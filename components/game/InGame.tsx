@@ -28,6 +28,10 @@ const Results = styled.div`
     flex-direction: column;
     align-items: center;
     row-gap: 20px;
+
+    @media (max-width: 920px){
+        display: none;
+    }
 `
 
 const Button = styled.div`
@@ -64,6 +68,17 @@ const ShadowWinner = styled.div`
             height: 600px; 
         }
 
+    }
+`
+
+const ResultsResponsive = styled.div`
+    display: none;
+
+    @media (max-width: 920px){
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        row-gap: 20px;
     }
 `
 
@@ -119,65 +134,80 @@ export const InGame = () => {
     }, [ isEndGame ])
 
     return (
-        <Box>
+        <>
+            <Box>
+                {
+                    inGame &&
+                    <audio src='/audio/change-hand.mp3' autoPlay/>
+                }
+            <BoxHand>
+                    <Text 
+                        size={ 26 }
+                        letterS={ 1.8 }    
+                    >YOU PICKED</Text>
+                    <Hand
+                        src={ urlHand! }
+                        value={ hand! }
+                        gradientBorder={ handDatabase.filter( c => c.value === hand )[0].gradientBorder }
+                        shadow={ handDatabase.filter( c => c.value === hand )[0].shadow } 
+                    />
+                    {
+                        result === "win" &&
+                        <ShadowWinner></ShadowWinner>
+                    }
+                    {
+                        result === "win" &&
+                        <audio src='/audio/audio-win.mp3' autoPlay/>
+                    }
+            </BoxHand>
+            { 
+                    result &&   
+                    <>
+                        <Results>
+                            <Text size={ 48 }>YOU { result.toLocaleUpperCase() }</Text>
+                            <Button onClick={ resetGame }>
+                                <Text letterS={ 1.6 }>PLAY AGAIN</Text>
+                            </Button>
+                        </Results>
+                    </>
+            }
             {
-                inGame &&
-                <audio src='/audio/change-hand.mp3' autoPlay/>
-            }
-           <BoxHand>
-                <Text 
-                    size={ 26 }
-                    letterS={ 1.8 }    
-                >YOU PICKED</Text>
-                <Hand
-                    src={ urlHand! }
-                    value={ hand! }
-                    gradientBorder={ handDatabase.filter( c => c.value === hand )[0].gradientBorder }
-                    shadow={ handDatabase.filter( c => c.value === hand )[0].shadow } 
-                />
-                {
-                    result === "win" &&
-                    <ShadowWinner></ShadowWinner>
+                    result === "draw" &&
+                    <audio src='/audio/audio-draw.mp3' autoPlay/>    
                 }
-                {
-                    result === "win" &&
-                    <audio src='/audio/audio-win.mp3' autoPlay/>
-                }
-           </BoxHand>
-           { 
+            <BoxHand>
+                    <Text 
+                        size={ 26 }
+                        letterS={ 1.8 }    
+                    >THE HOUSE PICKED</Text>
+                    <Hand
+                        src={ handDatabase.filter( c => c.value === houseHand )[0].src }
+                        value={ handDatabase.filter( c => c.value === houseHand )[0].value }
+                        gradientBorder={ handDatabase.filter( c => c.value === houseHand )[0].gradientBorder }
+                        shadow={ handDatabase.filter( c => c.value === houseHand )[0].shadow } 
+                        noEvent={ false }
+                    />
+                    {
+                        result === "lose" &&
+                        <ShadowWinner></ShadowWinner>
+                    }
+                    {
+                        result === "lose" &&
+                        <audio src='/audio/audio-lose.mp3' autoPlay/>
+                    }
+            </BoxHand>
+            </Box>
+            { 
                 result &&   
-                <Results>
-                    <Text size={ 48 }>YOU { result.toLocaleUpperCase() }</Text>
-                    <Button onClick={ resetGame }>
-                        <Text letterS={ 1.6 }>PLAY AGAIN</Text>
-                    </Button>
-                </Results>
-           }
-           {
-                result === "draw" &&
-                <audio src='/audio/audio-draw.mp3' autoPlay/>    
+                <>
+                    <ResultsResponsive>
+                        <Text size={ 48 }>YOU { result.toLocaleUpperCase() }</Text>
+                        <Button onClick={ resetGame }>
+                            <Text letterS={ 1.6 }>PLAY AGAIN</Text>
+                        </Button>
+                    </ResultsResponsive>
+                </>
             }
-           <BoxHand>
-                <Text 
-                    size={ 26 }
-                    letterS={ 1.8 }    
-                >THE HOUSE PICKED</Text>
-                <Hand
-                    src={ handDatabase.filter( c => c.value === houseHand )[0].src }
-                    value={ handDatabase.filter( c => c.value === houseHand )[0].value }
-                    gradientBorder={ handDatabase.filter( c => c.value === houseHand )[0].gradientBorder }
-                    shadow={ handDatabase.filter( c => c.value === houseHand )[0].shadow } 
-                    noEvent={ false }
-                />
-                {
-                    result === "lose" &&
-                    <ShadowWinner></ShadowWinner>
-                }
-                {
-                    result === "lose" &&
-                    <audio src='/audio/audio-lose.mp3' autoPlay/>
-                }
-           </BoxHand>
-        </Box>
+        </>
     )
 }
